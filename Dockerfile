@@ -10,6 +10,9 @@ COPY Cargo.toml Cargo.lock ./
 # Copy the source code
 COPY src ./src
 
+# Copy the static files
+COPY static ./static
+
 # Build the application
 RUN cargo build --release
 
