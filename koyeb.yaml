@@ -1,0 +1,9 @@
+name: axum-web-app
+services:
+  - name: axum-web-app-service
+    image:
+      name: axum-web-app-image
+      source: dockerfile
+    ports:
+      - name: http
+        port: 8080

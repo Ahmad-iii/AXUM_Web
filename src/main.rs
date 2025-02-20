@@ -30,7 +30,7 @@ async fn main() {
         .with_state(state);
 
     let listener = TcpListener::bind("0.0.0.0:8080").await.unwrap();
-    println!("🚀 Server running at http://localhost:8080");
+    println!("🚀 Server running at http://0.0.0.0:8080");
     axum::serve(listener, app).await.unwrap();
 }
 
