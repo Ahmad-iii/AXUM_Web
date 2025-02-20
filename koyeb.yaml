@@ -7,3 +7,11 @@ services:
     ports:
       - name: http
         port: 8080
+    healthchecks:
+      - name: http
+        protocol: HTTP
+        path: /
+        port: 8080
+        interval: 10s
+        timeout: 2s
+        retries: 3
