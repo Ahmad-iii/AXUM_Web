@@ -13,6 +13,9 @@ COPY src ./src
 # Copy the static files
 COPY static ./static
 
+# Install necessary tools
+RUN apt-get update && apt-get install -y gcc
+
 # Build the application
 RUN cargo build --release
 

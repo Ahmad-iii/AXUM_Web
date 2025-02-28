@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Appendices - AWK University</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/mermaid@8.13.3/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral',
+            er: {
+                useMaxWidth: false,
+                diagramPadding: 20,
+                layoutDirection: 'LR', // Left-to-right layout for better spacing
+                minEntityWidth: 150,  // Wider entities to prevent text overlap
+                minEntityHeight: 80,  // Taller entities for readability
+                entityPadding: 15     // Padding within entities
+            }
+        });
+    </script>
+    <style>
+        body {
+            background-color: #f9f9f9; /* Slightly lighter background for contrast */
+            padding: 20px;
+        }
+        .mermaid {
+            width: 100%;
+            overflow-x: auto; /* Allow horizontal scrolling if needed */
+            background-color: white; /* White background for the diagram */
+        }
+        .mermaid svg {
+            min-width: 800px; /* Ensure diagram isn’t compressed */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <!-- API Endpoints Appendix -->
+    <section>
+        <h1 class="text-3xl font-bold text-indigo-800 mb-6">Appendix B: API Endpoints</h1>
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-indigo-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-indigo-600 uppercase">Method</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-indigo-600 uppercase">Endpoint</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-indigo-600 uppercase">Description</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-indigo-600 uppercase">Axum Handler</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    <!-- Authentication -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">POST</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/auth/register</td>
+                        <td class="px-6 py-4 text-sm">Register a new user with role-based access</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">register_handler</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">POST</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/auth/login</td>
+                        <td class="px-6 py-4 text-sm">Authenticate user and return JWT token</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">login_handler</td>
+                    </tr>
+
+                    <!-- Course Management -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">GET</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/courses</td>
+                        <td class="px-6 py-4 text-sm">List all courses</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">list_courses_handler</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">POST</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/courses</td>
+                        <td class="px-6 py-4 text-sm">Create a new course (Teacher only)</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">create_course_handler</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">GET</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/courses/{id}</td>
+                        <td class="px-6 py-4 text-sm">Retrieve course details</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">get_course_handler</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">PUT</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/courses/{id}</td>
+                        <td class="px-6 py-4 text-sm">Update course (Teacher only)</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">update_course_handler</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">DELETE</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/courses/{id}</td>
+                        <td class="px-6 py-4 text-sm">Delete course (Teacher only)</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">delete_course_handler</td>
+                    </tr>
+
+                    <!-- Enrollment Management -->
+                    <tr class="bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">POST</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/courses/{id}/enroll</td>
+                        <td class="px-6 py-4 text-sm">Enroll student in a course</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">enroll_course_handler</td>
+                    </tr>
+
+                    <!-- Attendance Tracking -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">POST</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/courses/{id}/attendance</td>
+                        <td class="px-6 py-4 text-sm">Record attendance for a course (Teacher only)</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">record_attendance_handler</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">GET</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/courses/{id}/attendance</td>
+                        <td class="px-6 py-4 text-sm">View attendance records for a course</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">get_attendance_handler</td>
+                    </tr>
+
+                    <!-- Assignment Management -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">POST</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/courses/{id}/assignments</td>
+                        <td class="px-6 py-4 text-sm">Create assignment for a course (Teacher only)</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">create_assignment_handler</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">GET</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/courses/{id}/assignments</td>
+                        <td class="px-6 py-4 text-sm">List assignments for a course</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">list_assignments_handler</td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">POST</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/assignments/{id}/submit</td>
+                        <td class="px-6 py-4 text-sm">Submit an assignment (Student only)</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">submit_assignment_handler</td>
+                    </tr>
+
+                    <!-- Grading -->
+                    <tr class="bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">PUT</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/submissions/{id}/grade</td>
+                        <td class="px-6 py-4 text-sm">Grade a submission (Teacher only)</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">grade_submission_handler</td>
+                    </tr>
+
+                    <!-- Forum Interactions -->
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">POST</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/forums/{id}/posts</td>
+                        <td class="px-6 py-4 text-sm">Create a new forum post</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">create_forum_post_handler</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-indigo-600">GET</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm">/api/forums/{id}/posts</td>
+                        <td class="px-6 py-4 text-sm">List posts in a forum</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono">list_forum_posts_handler</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

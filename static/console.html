@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Rust Program</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        textarea { width: 80%; height: 200px; }
+        button { font-size: 18px; margin: 10px; padding: 10px 20px; }
+        pre { text-align: left; background: #f4f4f4; padding: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>Run Rust Program</h1>
+    <form id="rust-form">
+        <textarea id="rust-code" placeholder="Enter your Rust code here..."></textarea><br>
+        <button type="submit">Run</button>
+    </form>
+    <h2>Output:</h2>
+    <pre id="output"></pre>
+
+    <script>
+        document.getElementById('rust-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const code = document.getElementById('rust-code').value;
+            const response = await fetch('/run', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code })
+            });
+            if (response.ok) {
+                const result = await response.json();
+                document.getElementById('output').innerText = result.output;
+            } else {
+                document.getElementById('output').innerText = 'Error running code';
+            }
+        });
+    </script>
+</body>
+</html>
